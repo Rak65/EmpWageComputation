@@ -23,6 +23,6 @@ public class MonthWages {
             totalEmpWage += empWage;
             System.out.println("Employee wage : " + empWage);
         }
-        System.out.println("Total Employee wage: "+totalEmpWage);
+        System.out.println("Total Employee wages: "+totalEmpWage);
     }
 }
