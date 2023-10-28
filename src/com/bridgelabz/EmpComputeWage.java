@@ -1,36 +1,57 @@
 package com.bridgelabz;
 
 public class EmpComputeWage {
-    //constant
     public static final int IS_PART_TIME = 1;
     public static final int IS_FULL_TIME = 2;
-    public static int computeEmpWage(String company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth){
+
+    private final String company;
+    private final int empRatePerHour;
+    private final int numOfWorkinDays;
+    private final int maxHoursPerMonth;
+    private int totalEmpWage;
+
+    public EmpComputeWage(String company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth)
+    {
+        this.company = company;
+        this.empRatePerHour = empRatePerHour;
+        this.maxHoursPerMonth = maxHoursPerMonth;
+        this.numOfWorkinDays = numOfWorkingDays;
+    }
+
+    public void computeEmpWage()
+    {
         //variables
-        int empHrs =0, totalEmpHrs=0 , totalEmpWage = 0, totalWorkingDays=0;
+        int empHrs = 0 , totalEmpHours =0 , totalWorkingDays = 0;
+
         //computation
-        while (totalEmpHrs <= maxHoursPerMonth && totalWorkingDays < numOfWorkingDays){
+        while(totalEmpHours < maxHoursPerMonth && totalWorkingDays < numOfWorkinDays )
+        {
             totalWorkingDays++;
             int empCheck = (int) Math.floor(Math.random() * 10) % 3;
-            switch (empCheck) {
-                case IS_PART_TIME:
-                    empHrs = 4;
-                    break;
-                case IS_FULL_TIME:
-                    empHrs = 8;
-                    break;
-                default:
-                    empHrs = 0;
-            }
-            totalEmpHrs+=empHrs;
-            System.out.println("Days#: "+totalWorkingDays+" Emp Hrs : "+empHrs+" Total Employee hours : "+totalEmpHrs);
+
+            empHrs = switch (empCheck) {
+                case IS_PART_TIME -> 4;
+                case IS_FULL_TIME -> 8;
+                default -> 0;
+            };
+            totalEmpHours += empHrs;
+            System.out.println("Day:: "+totalWorkingDays+ " Emp Hrs:: "+totalEmpHours);
         }
-        totalEmpWage= totalEmpHrs * empRatePerHour;
-        System.out.println("Total Emp wage for company : "+company+" is : "+totalEmpWage);
-        return totalEmpWage;
+
+        totalEmpWage = totalEmpHours * empRatePerHour;
+    }
+
+    public String toString()
+    {
+        return "Total wage for company "+ company+ " is " + totalEmpWage;
     }
 
     public static void main(String[] args) {
-        computeEmpWage("DMart", 20, 2, 10);
-        computeEmpWage("Reliance", 10, 4, 20);
+        EmpComputeWage dMart = new EmpComputeWage("DMart" , 20, 2, 10);
+        EmpComputeWage reliance = new EmpComputeWage("Reliance" , 10, 4, 20);
+        dMart.computeEmpWage();
+        System.out.println(dMart);
+        reliance.computeEmpWage();
+        System.out.println(reliance);
     }
 }
