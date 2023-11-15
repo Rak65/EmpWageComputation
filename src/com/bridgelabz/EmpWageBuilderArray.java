@@ -1,22 +1,24 @@
 package com.bridgelabz;
 
+import java.util.LinkedList;
+
 public class EmpWageBuilderArray implements IComputeEmpWage{
     public static final int IS_PART_TIME = 1;
     public static final int IS_FULL_TIME = 2;
 
-    private int numOfCompany = 0;
-    private EmpComputeWage[] empComputeWagesArray;
+    private LinkedList<EmpComputeWage> companyEmpWageList;
     public EmpWageBuilderArray(){
-        empComputeWagesArray = new EmpComputeWage[5];
+        companyEmpWageList = new LinkedList<>();
     }
     public void addCompanyEmpWage(String company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth){
-        empComputeWagesArray[numOfCompany] = new EmpComputeWage(company,empRatePerHour,numOfWorkingDays,maxHoursPerMonth);
-        numOfCompany++;
+        EmpComputeWage companyEmpWage= new EmpComputeWage(company,empRatePerHour,numOfWorkingDays,maxHoursPerMonth);
+        companyEmpWageList.add(companyEmpWage);
     }
     public void computeEmpWage(){
-        for (int i = 0; i<numOfCompany; i++){
-            empComputeWagesArray[i].setTotalEmpWage(this.computeEmpWage(empComputeWagesArray[i]));
-            System.out.println(empComputeWagesArray[i]);
+        for (int i = 0; i<companyEmpWageList.size(); i++){
+            EmpComputeWage companyEmpWage = companyEmpWageList.get(i);
+            companyEmpWage.setTotalEmpWage(this.computeEmpWage(companyEmpWage));
+            System.out.println(companyEmpWage);
         }
     }
     private int computeEmpWage(EmpComputeWage empComputeWage){
