@@ -14,6 +14,7 @@ public class EmpComputeWage {
         this.empRatePerHour = empRatePerHour;
         this.maxHoursPerMonth = maxHoursPerMonth;
         this.numOfWorkingDays = numOfWorkingDays;
+        totalEmpWage =0;
     }
 
     public void setTotalEmpWage(int totalEmpWage){
